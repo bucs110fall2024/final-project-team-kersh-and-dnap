@@ -6,14 +6,13 @@
 
 ## Team Members
 
-<< Michael DiNapoli, Will Kershaw List  >>
+<< Michael DiNapoli, Will Kershaw  >>
 
 ***
 
 ## Project Description
 
-<< It will be a 2D platformer Game >>
-
+<< It will be a 2D platformer Game. We plan to make a game similar to Mario where the character/ hero defeats enemies and dodges objects to complete the level. >>
 ***    
 
 ## GUI Design
