@@ -1,5 +1,5 @@
 import pygame
-
+pygame.init()
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x, y, enemy, speed=1, img="XXXXXX.png"):
         super().__init__()
