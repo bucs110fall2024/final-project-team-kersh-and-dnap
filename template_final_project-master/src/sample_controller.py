@@ -10,7 +10,7 @@ class Controller:
     self.gamestate= "menu"
     
   def mainloop(self):
-    #select state loop
+    """This loop transitions between game states"""
 
     screen = pygame.display.set_mode((800, 600))
     pygame.display.set_caption('MARIO!')
@@ -25,7 +25,12 @@ class Controller:
   ### below are some sample loop states ###
 
   def menuloop(self, screen):
+    background = pygame.Surface((800,600))
+    background.fill((135, 206, 235))
     
+    font= pygame.font.Font(None, 74)
+    title = font.render("Mario", True, (255, 255, 255))
+    title_on_screen= title.get_rect(center=(400,200))
       #event loop
 
       #update data
@@ -33,6 +38,10 @@ class Controller:
       #redraw
       
   def gameloop(self, screen):
+    background = pygame.Surface((800,600))
+    background.fill((135, 206, 235))
+    player= pygame.Rect
+    while self.state == "game":
       #event loop
 
       #update data
@@ -40,9 +49,9 @@ class Controller:
       #redraw
     
   def gameoverloop(self):
+    
       #event loop
 
       #update data
 
       #redraw
-
