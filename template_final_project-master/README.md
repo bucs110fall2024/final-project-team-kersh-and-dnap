@@ -46,7 +46,7 @@
 |----------------------|:--------------------:|----------------------------------:|
 |  1                   | Run main.py.         | GUI window appears with the title |
 |                      |                      |Mario and displays the main menu.  |
-|  2                   | Press Enter on the.  |Display changes to gameplay screen.|
+|  2                   | Press Enter on the   |Display changes to gameplay screen.|
 |                      | main menu.           |                                   |
 |  3                   | Use left Arrow key.  | The player moves left.            |
 |  4                   | Use right Arrow key. | The player moves right.           |

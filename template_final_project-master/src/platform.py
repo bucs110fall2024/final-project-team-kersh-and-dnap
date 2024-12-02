@@ -1,10 +1,10 @@
 import pygame
 pygame.init()
-class Platform():
+class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
-        self.image= pygame.Surface(width, height)
-        self.image.fill(0,255,0)
-        while True: 
-            self.image.get_rect().x +=1
-
+        super().__init__()
+        self.ground= pygame.Surface(width, height)
+        self.ground.fill(0,255,0)
+        self.rect = self.ground.get_rect(topleft=(x, y))
+       
 
