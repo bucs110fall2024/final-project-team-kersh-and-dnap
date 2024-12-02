@@ -30,14 +30,55 @@ class World:
 
     def run(self): 
         """Game loop"""
-        pass
+        while self.playing:
+            self.events()
+            self.update()
+            self.draw()
+            self.clock.tick(60)
 
     def events(self): #for each key event
-        pass
+        """Key events and Inputs"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.playing=False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    self.player.horizontal_move(-5)
+                elif event.key == pygame.K_RIGHT:
+                    self.player.horizontal_move(5)
+                elif event.key == pygame.K_UP:
+                    self.player.vertical_move()
+            elif event.type == pygame.KEYUP:
+                if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
+                    self.player.horizontal_move(0)
 
     def update(self): #update and redraw screen 
-        pass
+        """XXXXXX"""
+        self.all_sprites.update()
+
+        on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
+        if on_ground is True:
+            self.player.standing=True
+            self.player.rect.y = on_ground[0].rect.top
+        else:
+            self.player.on_ground =False
+
+        #ENEMY COLLSIONS
+        for enemy in self.enemies:
+            if pygame.sprite.collide_rect(self.player, enemy):
+                if self.player.rect.bottom <= enemy.rect.top + 10 and self.player.speedY > 0:
+                    self.enemies.remove(enemy)
+                    self.all_sprites.remove(enemy)
+                    self.player.speedY= -10
+                else:
+                    self.player.health-=1
+                    if self.player.health <=0:
+                        print("Game Over")
+                        self.playing = False
 
     def draw(self): #makes background and puts sprites on the screen
-        pass
+        """Visualizes the background and sprites"""
+        self.screen.fill(135, 206, 235) #LIGHT BLUE
+        self.all_sprites.draw(self.screen)
+        pygame.display.flip()
 
