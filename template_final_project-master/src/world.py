@@ -28,15 +28,16 @@ class World:
         self.enemies.add(enemy)
         self.all_sprites.add(Enemy)
 
-    def run(self):
+    def run(self): 
+        """Game loop"""
         pass
 
-    def events(self):
+    def events(self): #for each key event
         pass
 
-    def update(self):
+    def update(self): #update and redraw screen 
         pass
 
-    def draw(self):
+    def draw(self): #makes background and puts sprites on the screen
         pass
 
