@@ -28,9 +28,6 @@ class Controller:
     background = pygame.Surface((800,600))
     background.fill((135, 206, 235))
     
-    font= pygame.font.Font(None, 74)
-    title = font.render("Mario", True, (255, 255, 255))
-    title_on_screen= title.get_rect(center=(400,200))
       #event loop
 
       #update data
@@ -49,7 +46,7 @@ class Controller:
       #redraw
     
   def gameoverloop(self):
-    
+    pass
       #event loop
 
       #update data
