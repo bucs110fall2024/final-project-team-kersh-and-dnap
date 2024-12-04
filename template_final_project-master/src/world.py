@@ -32,11 +32,16 @@ class World:
         pass
 
     def events(self):
-        pass
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT():
+                pygame.quit()
+                quit()
 
     def update(self):
-        pass
+        self.all_sprites.update()
 
     def draw(self):
-        pass
+        self.screen.fill((255,255,255))
+        self.all_sprites.draw(self.screen)
+        pygame.display.update()
 
