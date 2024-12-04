@@ -24,7 +24,7 @@ class Controller:
 
   def menuloop(self):
     """ The menu """
-    
+    pygame.display.set_caption("Fun Platformer!! press enter")
     self.screen.fill((135, 206, 235)) #Light Blue
     pygame.display.flip()  # Updat
 
