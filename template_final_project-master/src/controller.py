@@ -1,5 +1,6 @@
 import pygame
 from src.world import World
+from src.player import Player
 class Controller:
   
   def __init__(self):
@@ -58,6 +59,6 @@ class Controller:
       elif event.type == pygame.KEYDOWN:
         if event.type == pygame.K_RETURN:# return to game
           self.gamestate = "game"
-        if event.key == pygame.K_ESCAPE: # press esape to quit
+        if event.type == pygame.K_ESCAPE: # press esape to quit
           self.gamestate = "menu"
      

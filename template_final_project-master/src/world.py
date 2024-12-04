@@ -1,8 +1,8 @@
 import pygame
 
-from player import Player
-from enemy import Enemy
-from platform import Platform
+from src.player import Player
+from src.enemy import Enemy
+from src.platform import Platform
 
 class World:
     def __init__(self):
@@ -10,6 +10,7 @@ class World:
         self.screen = pygame. display.set_mode(800,600)
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
+        self.playing = True
 
         #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
