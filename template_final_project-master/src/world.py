@@ -1,6 +1,5 @@
 import pygame
 
-pygame.init()
 from player import Player
 from enemy import Enemy
 from platform import Platform
