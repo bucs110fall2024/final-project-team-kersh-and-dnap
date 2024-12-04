@@ -5,6 +5,7 @@ class Controller:
   
   def __init__(self):
     pygame.init()
+    self.screen = pygame.display.set_mode((800, 600))
     self.sprites = pygame.sprite.Group()
     self.max_sprites = 20
     self.active =True
@@ -13,24 +14,19 @@ class Controller:
   def mainloop(self):
     """This loop transitions between game states"""
 
-    screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption('MARIO!')
-
-    while self.active is True:
+    while self.active:
       if self.gamestate == "menu":
-        self.menuloop(screen)
+        self.menuloop()
       elif self.gamestate == "game":
-        self.gameloop(screen)
+        self.gameloop()
       elif self.gamestate == "gameover":
-        self.gameoverloop(screen)
+        self.gameoverloop()
   ### below are some sample loop states ###
 
   def menuloop(self, screen):
     """ The menu """
-    background = pygame.Surface((800,600))
-    background.fill((135, 206, 235))
-
-    screen.blit(background, (0, 0))  # Draw background on screen
+    
+    screen.fill((135, 206, 235)) #Light Blue
     pygame.display.flip()  # Updat
 
     for event in pygame.event.get():
@@ -38,6 +34,7 @@ class Controller:
         self.active = False
       elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RETURN:
+          print( "TO GAME")
           self.gamestate = "game"
         elif event.key == pygame.K_ESCAPE:
           self.active = False
@@ -48,23 +45,18 @@ class Controller:
       #redraw
       
   def gameloop(self, screen):
-   the_game=World()
-   the_game.run()
-   self.gamestate = "gameover"
+   the_game=World(self.screen)
+   self.gamestate = the_game.run()
       
   def gameoverloop(self, screen):
-    background = pygame.Surface((800,600))
-    background.fill((200, 0, 0))
-
-    screen.blit(background, (0, 0))  # Draw background on screen
+   
+    self.screen.fill((200,0,0))
     pygame.display.flip()  # Update display
 
     for event in pygame.event.get():
       if event.type== pygame.QUIT:
         self.active = False
       elif event.type == pygame.KEYDOWN:
-        if event.type == pygame.K_RETURN:# return to game
-          self.gamestate = "game"
-        elif event.type == pygame.K_ESCAPE: # press esape to quit
+        if event.key == pygame.K_RETURN: # press esape to quit
           self.gamestate = "menu"
      

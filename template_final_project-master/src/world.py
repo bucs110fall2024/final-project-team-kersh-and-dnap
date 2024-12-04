@@ -5,9 +5,9 @@ from src.enemy import Enemy
 from src.platform import Platform
 
 class World:
-    def __init__(self):
+    def __init__(self, screen):
         pygame.init()
-        self.screen = pygame.display.set_mode(800,600)
+        self.screen = screen
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
         self.playing = True
@@ -29,6 +29,10 @@ class World:
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
+        print(f"Player sprite added: {self.player in self.all_sprites}")
+        print(f"Platform sprite added: {ground in self.all_sprites}")
+        print(f"Enemy sprite added: {enemy in self.all_sprites}")
+
     def run(self): 
         """Game loop"""
         while self.playing:
@@ -37,6 +41,12 @@ class World:
             self.draw()
             self.clock.tick(60)
 
+        if self.player.health <= 0:
+            print("Game Over")
+            return "gameover"
+        
+        return "menu"
+    
     def events(self): #for each key event
         """Key events and Inputs"""
         for event in pygame.event.get():
