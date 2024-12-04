@@ -24,12 +24,12 @@ class Player(pygame.sprite.Sprite):
             self.speedY+= 1
         else:
             self.speedY = 0
-         #make sure player stays on screen
+
         if self.rect.top < 0:
-            self.rect.top = 0
+          self.rect.top = 0
         if self.rect.bottom > 600:
-            self.rect.bottom = 600
-            self.on_ground = True
+          self.rect.bottom = 600
+          self.on_ground = True
 
     def horizontal_move(self, dx):
         """Movement left or right"""

@@ -66,7 +66,8 @@ class World:
         on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
         if on_ground:
             self.player.standing=True
-            self.player.rect.y = on_ground[0].rect.top
+            self.player.on_ground = True
+            self.player.rect.y = on_ground[0].rect.top - self.player.rect.height
         else:
             self.player.on_ground =False
 
