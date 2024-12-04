@@ -17,7 +17,7 @@ class World:
         self.enemies = pygame.sprite.Group()
 
         self.player= Player(100, 300, img=None)
-        self.all_sprites.add(Player)
+        self.all_sprites.add(self.player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
         self.platforms.add(ground)
@@ -26,7 +26,7 @@ class World:
 
         enemy = Enemy(200, 300, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
-        self.all_sprites.add(Enemy)
+        self.all_sprites.add(enemy)
 
     def run(self): 
         """Game loop"""

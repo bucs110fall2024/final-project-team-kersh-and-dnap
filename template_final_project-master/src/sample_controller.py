@@ -46,7 +46,7 @@ class Controller:
     background = pygame.Surface((800,600))
     background.fill((135, 206, 235))
     player= pygame.Rect
-    while self.state == "game":
+    while self.gamestate == "game":
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
           self.active = False
@@ -62,8 +62,8 @@ class Controller:
       #redraw
     
   def gameoverloop(self, screen):
-    backgroud = pygame.Surface((800,600))
-    backgroud.fill("red")
+    background = pygame.Surface((800,600))
+    background.fill("red")
     #event loop
     for event in pygame.event.get():
       if event.type == pygame.QUIT:

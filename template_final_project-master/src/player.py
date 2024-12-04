@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, img="XXXXXXXXXX.png"):
@@ -17,6 +18,10 @@ class Player(pygame.sprite.Sprite):
         """Update player's position based on speed"""
         self.rect.x += self.speedX #adds distance based on speed to coordinate
         self.rect.y += self.speedY
+        
+    def apply_gravity(self):
+        if not self.on_ground:
+            self.speedY += self.gravity
 
     def horizontal_move(self, dx):
         """Movement left or right"""
