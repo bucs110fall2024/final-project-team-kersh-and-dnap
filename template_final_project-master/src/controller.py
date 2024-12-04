@@ -6,8 +6,7 @@ class Controller:
   def __init__(self):
     pygame.init()
     self.screen = pygame.display.set_mode((800, 600))
-    self.sprites = pygame.sprite.Group()
-    self.max_sprites = 20
+    pygame.display.set_caption("Fun Platformer!!")
     self.active =True
     self.gamestate= "menu"
     
@@ -23,10 +22,10 @@ class Controller:
         self.gameoverloop()
   ### below are some sample loop states ###
 
-  def menuloop(self, screen):
+  def menuloop(self):
     """ The menu """
     
-    screen.fill((135, 206, 235)) #Light Blue
+    self.screen.fill((135, 206, 235)) #Light Blue
     pygame.display.flip()  # Updat
 
     for event in pygame.event.get():
@@ -44,11 +43,12 @@ class Controller:
 
       #redraw
       
-  def gameloop(self, screen):
+  def gameloop(self):
+   
    the_game=World(self.screen)
    self.gamestate = the_game.run()
       
-  def gameoverloop(self, screen):
+  def gameoverloop(self):
    
     self.screen.fill((200,0,0))
     pygame.display.flip()  # Update display

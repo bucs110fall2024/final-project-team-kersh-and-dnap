@@ -29,10 +29,6 @@ class World:
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
-        print(f"Player sprite added: {self.player in self.all_sprites}")
-        print(f"Platform sprite added: {ground in self.all_sprites}")
-        print(f"Enemy sprite added: {enemy in self.all_sprites}")
-
     def run(self): 
         """Game loop"""
         while self.playing:
