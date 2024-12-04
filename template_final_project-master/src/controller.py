@@ -25,10 +25,13 @@ class Controller:
         self.gameoverloop(screen)
   ### below are some sample loop states ###
 
-  def menuloop(self):
+  def menuloop(self, screen):
     """ The menu """
     background = pygame.Surface((800,600))
     background.fill((135, 206, 235))
+
+    screen.blit(background, (0, 0))  # Draw background on screen
+    pygame.display.flip()  # Updat
 
     for event in pygame.event.get():
       if event.type== pygame.QUIT:
@@ -44,14 +47,17 @@ class Controller:
 
       #redraw
       
-  def gameloop(self):
+  def gameloop(self, screen):
    the_game=World()
    the_game.run()
    self.gamestate = "gameover"
       
-  def gameoverloop(self):
+  def gameoverloop(self, screen):
     background = pygame.Surface((800,600))
     background.fill((200, 0, 0))
+
+    screen.blit(background, (0, 0))  # Draw background on screen
+    pygame.display.flip()  # Update display
 
     for event in pygame.event.get():
       if event.type== pygame.QUIT:
@@ -59,6 +65,6 @@ class Controller:
       elif event.type == pygame.KEYDOWN:
         if event.type == pygame.K_RETURN:# return to game
           self.gamestate = "game"
-        if event.type == pygame.K_ESCAPE: # press esape to quit
+        elif event.type == pygame.K_ESCAPE: # press esape to quit
           self.gamestate = "menu"
      

@@ -58,7 +58,7 @@ class World:
         self.all_sprites.update()
 
         on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
-        if on_ground is True:
+        if on_ground:
             self.player.standing=True
             self.player.rect.y = on_ground[0].rect.top
         else:
