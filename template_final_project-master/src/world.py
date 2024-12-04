@@ -85,7 +85,7 @@ class World:
 
     def draw(self): #makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.fill(135, 206, 235) #LIGHT BLUE
+        self.screen.fill((135, 206, 235)) #LIGHT BLUE
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
