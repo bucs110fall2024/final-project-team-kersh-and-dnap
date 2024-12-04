@@ -7,7 +7,7 @@ from src.platform import Platform
 class World:
     def __init__(self):
         pygame.init()
-        self.screen = pygame. display.set_mode(800,600)
+        self.screen = pygame.display.set_mode(800,600)
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
         self.playing = True

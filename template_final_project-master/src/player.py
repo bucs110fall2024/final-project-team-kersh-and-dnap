@@ -19,6 +19,12 @@ class Player(pygame.sprite.Sprite):
         """Update player's position based on speed"""
         self.rect.x += self.speedX #adds distance based on speed to coordinate
         self.rect.y += self.speedY
+        self.speedY+= 1 #gravity
+
+        if self.rect.y>500:
+            self.rect.y =500
+            self.on_ground = True
+            self.speedY = 0
 
     def horizontal_move(self, dx):
         """Movement left or right"""
@@ -28,5 +34,6 @@ class Player(pygame.sprite.Sprite):
         "Movement up. Only works when the player is on the ground."
         if self.standing:
             self.speedY= -15
+            self.on_ground = False
 
     
