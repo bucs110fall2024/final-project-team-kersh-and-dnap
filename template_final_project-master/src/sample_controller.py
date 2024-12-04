@@ -27,7 +27,15 @@ class Controller:
   def menuloop(self, screen):
     background = pygame.Surface((800,600))
     background.fill((135, 206, 235))
-    
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          self.active = False
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_RETURN:
+            self.gamestate = "game"
+          elif event.key == pygame.K_ESCAPE:
+            self.active = False
+            
       #event loop
 
       #update data
@@ -39,15 +47,33 @@ class Controller:
     background.fill((135, 206, 235))
     player= pygame.Rect
     while self.state == "game":
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          self.active = False
+        if event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_RETURN:
+            self.gamestate = "gameover"
+        
+        
       #event loop
 
       #update data
 
       #redraw
     
-  def gameoverloop(self):
-    pass
-      #event loop
+  def gameoverloop(self, screen):
+    backgroud = pygame.Surface((800,600))
+    backgroud.fill("red")
+    #event loop
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        self.active = False
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_RETURN:
+          self.gamestate = "game"
+        
+    
+     
 
       #update data
 
