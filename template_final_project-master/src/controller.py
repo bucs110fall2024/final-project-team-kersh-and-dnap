@@ -26,6 +26,7 @@ class Controller:
     """ The menu """
     pygame.display.set_caption("Fun Platformer!! press enter")
     self.screen.fill((135, 206, 235)) #Light Blue
+    pygame.font.Font("Press Enter")
     pygame.display.flip()  # Updat
 
     for event in pygame.event.get():

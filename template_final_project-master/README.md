@@ -50,6 +50,6 @@
 |                      | main menu.           |                                   |
 |  3                   | Use left Arrow key.  | The player moves left.            |
 |  4                   | Use right Arrow key. | The player moves right.           |
-|  5                   | Use the space bar.   | The player jumps.                 |
+|  5                   | Use up Arrow key.    | The player jumps.                 |
 |  6                   | Close the game.      | the program ends.                 |
 
