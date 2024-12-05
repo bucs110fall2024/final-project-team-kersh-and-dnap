@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, img="XXXXXXXXXX.png"):
+    def __init__(self, x, y, img="R.png"):
        super().__init__()
        self.image = pygame.image.load(img)
        self.rect =self.image.get_rect()

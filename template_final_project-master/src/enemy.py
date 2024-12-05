@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, x, y, enemy, speed=1, img="XXXXXX.png"):
+    def __init__(self, x, y, enemy, speed=1, img="pngkey.com-gaming-characters-png-1790042.png"):
         super().__init__()
         self.image = pygame.image.load(img) if img else pygame.Surface(40,40)
         self.image.fill(255, 0, 0)
