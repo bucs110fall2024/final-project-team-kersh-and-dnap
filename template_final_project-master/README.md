@@ -44,12 +44,14 @@
 
 | Step                 |Procedure             |Expected Results                   |
 |----------------------|:--------------------:|----------------------------------:|
-|  1                   | Run main.py.         | GUI window appears with the title |
-|                      |                      |and displays the main menu.        |
+|  1                   | Run main.py.         |GUI window appears with the "Press |
+|                      |                      |  enter to play" message.          |
 |  2                   | Press Enter on the   |Display changes to gameplay screen.|
 |                      | main menu.           |                                   |
-|  3                   | Use left Arrow key.  | The player moves left.            |
-|  4                   | Use right Arrow key. | The player moves right.           |
-|  5                   | Use up Arrow key.    | The player jumps.                 |
-|  6                   | Close the game.      | the program ends.                 |
+|  3                   | Use left Arrow key.  |The player (yellow Box) moves left.|
+|  4                   | Use right Arrow key. |The player moves right.            |
+|  5                   | Use up Arrow key.    |The player moves up then back down.|
+|  6                   | Jump on top of the   |The red box is removed from the    |  
+|                      | redbox.              |  screen.                          |
+|  7                   | Close the game.      |The program ends.                 |
 

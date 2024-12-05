@@ -17,15 +17,15 @@ class World:
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player= Player(100, 300, img=None)
+        self.player= Player(100, 500, img=None)
         self.all_sprites.add(self.player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
         self.platforms.add(ground)
         self.all_sprites.add(ground)
         #ADD FLOATING PLATFORMS
-
-        enemy = Enemy(200, 300, enemy=True, speed=1, img=None)
+        
+        enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 

@@ -28,7 +28,7 @@ class Controller:
     self.screen.fill((135, 206, 235)) #Light Blue
     font = pygame.font.Font(None, 36)
     text = font.render("Press Enter to play", True, (0,0,0))
-    self.screen.blit(400, 300)
+    self.screen.blit(text, (300, 400))
     pygame.display.flip()  # Updat
 
     for event in pygame.event.get():
@@ -60,6 +60,6 @@ class Controller:
       if event.type== pygame.QUIT:
         self.active = False
       elif event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_RETURN: # press esape to quit
+        if event.key == pygame.K_RETURN: # press escape to quit
           self.gamestate = "menu"
      
