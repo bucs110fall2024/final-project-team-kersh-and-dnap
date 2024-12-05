@@ -28,7 +28,7 @@ class Controller:
     self.screen.fill((135, 206, 235)) #Light Blue
     font = pygame.font.Font(None, 36)
     text = font.render("Press Enter to play", True, (0,0,0))
-    self.screen.blit(400, 300)
+    self.screen.blit((400, 300))
     pygame.display.flip()  # Updat
 
     for event in pygame.event.get():
