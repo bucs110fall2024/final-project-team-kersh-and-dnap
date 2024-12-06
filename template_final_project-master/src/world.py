@@ -38,7 +38,7 @@ class World:
         self.all_sprites.add(ground)
         #ADD FLOATING PLATFORMS
         
-        enemy = Enemy(500, 465, enemy=True, speed=1)
+        enemy = Enemy(500, 400, enemy=True, speed=1)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
         self.enemy_spawn_timer = 0
