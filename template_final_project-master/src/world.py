@@ -1,4 +1,5 @@
 import pygame
+
 from src.player import Player
 from src.enemy import Enemy
 from src.platform import Platform
@@ -10,30 +11,20 @@ class World:
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
         self.playing = True
-        
-        self.bg_color = (135, 206, 235)  # Light blue
-        self.bg_width = 1600  # A large width to allow scrolling
-        self.bg_height = self.screen.get_height()  # Match screen height
-        self.bg_scroll = 0  # Horizontal scroll offset
 
-        # ADD SPRITE GROUPS
+        #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player = Player(100, 400, img=None)
+        self.player= Player(100, 500, img=None)
         self.all_sprites.add(self.player)
 
-        ground = Platform(0, 500, 800, 100)  # x, y, width, height
+        ground= Platform(0,500,800,100)#x,y,width,height
         self.platforms.add(ground)
         self.all_sprites.add(ground)
-
-        # ADD FLOATING PLATFORMS
-        floating = Platform(300, 400, 200, 20)
-        self.platforms.add(floating)
-        self.all_sprites.add(floating)
-
-        # Add an enemy
+        #ADD FLOATING PLATFORMS
+        
         enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
@@ -46,11 +37,17 @@ class World:
             self.draw()
             self.clock.tick(60)
 
-    def events(self):  # for each key event
+        if self.player.health <= 0:
+            print("Game Over")
+            return "gameover"
+        
+        return "menu"
+    
+    def events(self): #for each key event
         """Key events and Inputs"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.playing = False
+                self.playing=False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.player.horizontal_move(-5)
@@ -62,48 +59,33 @@ class World:
                 if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
                     self.player.horizontal_move(0)
 
-    def update(self):  # update and redraw screen 
+    def update(self): #update and redraw screen 
         """XXXXXX"""
         self.all_sprites.update()
 
-        on_ground = pygame.sprite.spritecollide(self.player, self.platforms, False)
+        on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
         if on_ground:
-            self.player.standing = True
+            self.player.standing=True
             self.player.on_ground = True
             self.player.rect.y = on_ground[0].rect.top - self.player.rect.height
         else:
-            self.player.on_ground = False
-            self.player.standing = False
+            self.player.on_ground =False
 
-        # ENEMY COLLISIONS
+        #ENEMY COLLSIONS
         for enemy in self.enemies:
             if pygame.sprite.collide_rect(self.player, enemy):
                 if self.player.rect.bottom <= enemy.rect.top + 10 and self.player.speedY > 0:
                     self.enemies.remove(enemy)
                     self.all_sprites.remove(enemy)
-                    self.player.speedY = -10
+                    self.player.speedY= -10
                 else:
-                    self.player.health -= 1
-                    if self.player.health <= 0:
+                    self.player.health-=1
+                    if self.player.health <=0:
                         print("Game Over")
                         self.playing = False
 
-        if self.player.rect.x > 600:  # Scroll right
-            self.bg_scroll -= 5
-            self.player.rect.x = 600  # keep at center
-        elif self.player.rect.x < 200 and self.bg_scroll < 0:  # Scroll left
-            self.bg_scroll += 5
-            self.player.rect.x = 200
-
-    def draw(self):  # makes background and puts sprites on the screen
+    def draw(self): #makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.fill(self.bg_color)  # Fill with light blue
-
-        # If the background scrolls, shift the background horizontally
-        self.screen.scroll(dx=self.bg_scroll, dy=0)  # Scroll horizontally
-
-        # Draw all sprites
+        self.screen.fill((135, 206, 235)) #LIGHT BLUE
         self.all_sprites.draw(self.screen)
-
-        # Update the display
         pygame.display.flip()
