@@ -1,11 +1,11 @@
 import pygame
-
+pygame.init()
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, img="XXXXXXXXXX.png"):
+    def __init__(self, x, y, img="R.png"):
        super().__init__()
-       #self.image = pygame.image.load(img)
-       self.image = pygame.Surface((40,40))
-       self.image.fill((255,255,0))
+       self.image = pygame.image.load(img)
+       #self.image = pygame.Surface((40,40))
+       #self.image.fill((255,255,0))
        self.rect =self.image.get_rect()
        self.rect.x = x #Coordinates of the character
        self.rect.y = y #^^^^
@@ -19,17 +19,6 @@ class Player(pygame.sprite.Sprite):
         """Update player's position based on speed"""
         self.rect.x += self.speedX #adds distance based on speed to coordinate
         self.rect.y += self.speedY
-    
-        if not self.on_ground:
-            self.speedY+= 1
-        else:
-            self.speedY = 0
-
-        if self.rect.top < 0:
-          self.rect.top = 0
-        if self.rect.bottom > 600:
-          self.rect.bottom = 600
-          self.on_ground = True
 
     def horizontal_move(self, dx):
         """Movement left or right"""

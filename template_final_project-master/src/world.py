@@ -22,8 +22,8 @@ class World:
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player= Player(100, 500, img=None)
-        self.all_sprites.add(self.player)
+        self.player= Player(100, 300, img=None)
+        self.all_sprites.add(Player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
         self.platforms.add(ground)
@@ -46,12 +46,6 @@ class World:
             self.draw()
             self.clock.tick(60)
 
-        if self.player.health <= 0:
-            print("Game Over")
-            return "gameover"
-        
-        return "menu"
-    
     def events(self): #for each key event
         """Key events and Inputs"""
         for event in pygame.event.get():
@@ -110,4 +104,5 @@ class World:
 
          # Update the display
         pygame.display.flip()
+
 
