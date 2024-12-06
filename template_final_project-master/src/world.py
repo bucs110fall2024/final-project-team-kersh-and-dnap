@@ -23,6 +23,8 @@ class World:
         self.playing = True
         self.bg_color = (135, 206, 235) 
 
+        self.kills=0
+
         #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
@@ -103,6 +105,7 @@ class World:
                     self.enemies.remove(enemy)
                     self.all_sprites.remove(enemy)
                     self.player.speedY= -10
+                    self.kills += 1
                 else:
                     self.player.health-=1
                     if self.player.health <=0:
@@ -119,6 +122,9 @@ class World:
         message = "Keep Jumping on Red!"
         text = font.render(message, True, (0, 0, 0))  # Black text
         self.screen.blit(text, (10, 10)) 
+
+        kill_counter = font.render(f"Kills: {self.kills}",True,(0,0,0))
+        self.screen.blit(kill_counter,(10,50))
 
         pygame.display.flip()
 
