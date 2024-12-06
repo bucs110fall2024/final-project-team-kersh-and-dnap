@@ -1,5 +1,4 @@
 import pygame
-
 from src.player import Player
 from src.enemy import Enemy
 from src.platform import Platform
@@ -12,29 +11,31 @@ class World:
         self.clock = pygame.time.Clock()
         self.playing = True
 
-        self.background = pygame.image.load("C:/Users/luigi/OneDrive/Desktop/final-project-team-kersh-and-dnap-1/assets/sky.png")  
+        
+        self.background = pygame.image.load("image")  
         self.bg_width = self.background.get_width()
         self.bg_height = self.background.get_height()
         self.bg_scroll = 0  # Horizontal scroll offset
 
-        #ADD SPRITE GROUPS
+        # ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player= Player(100, 300, img="R.png")
-        self.all_sprites.add(Player)
+        self.player = Player(100, 300, img=None)
+        self.all_sprites.add(self.player)
 
-        ground= Platform(0,500,800,100)#x,y,width,height
+        ground = Platform(0, 500, 800, 100)  # x, y, width, height
         self.platforms.add(ground)
         self.all_sprites.add(ground)
-        #ADD FLOATING PLATFORMS
 
-        floating= Platform(300, 400, 200, 20)
+        # ADD FLOATING PLATFORMS
+        floating = Platform(300, 400, 200, 20)
         self.platforms.add(floating)
         self.all_sprites.add(floating)
-        
-        enemy = Enemy(500, 465, enemy=True, speed=1, img="template_final_project-master/src/pngkey.com-gaming-characters-png-1790042.png")
+
+        # Add an enemy
+        enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
@@ -46,13 +47,11 @@ class World:
             self.draw()
             self.clock.tick(60)
 
-        return "gameover"
-
-    def events(self): #for each key event
+    def events(self):  # for each key event
         """Key events and Inputs"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.playing=False
+                self.playing = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.player.horizontal_move(-5)
@@ -64,28 +63,28 @@ class World:
                 if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
                     self.player.horizontal_move(0)
 
-    def update(self): #update and redraw screen 
+    def update(self):  # update and redraw screen 
         """XXXXXX"""
         self.all_sprites.update()
 
-        on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
+        on_ground = pygame.sprite.spritecollide(self.player, self.platforms, False)
         if on_ground:
-            self.player.standing=True
+            self.player.standing = True
             self.player.on_ground = True
             self.player.rect.y = on_ground[0].rect.top - self.player.rect.height
         else:
-            self.player.on_ground =False
+            self.player.on_ground = False
 
-        #ENEMY COLLSIONS
+        # ENEMY COLLISIONS
         for enemy in self.enemies:
             if pygame.sprite.collide_rect(self.player, enemy):
                 if self.player.rect.bottom <= enemy.rect.top + 10 and self.player.speedY > 0:
                     self.enemies.remove(enemy)
                     self.all_sprites.remove(enemy)
-                    self.player.speedY= -10
+                    self.player.speedY = -10
                 else:
-                    self.player.health-=1
-                    if self.player.health <=0:
+                    self.player.health -= 1
+                    if self.player.health <= 0:
                         print("Game Over")
                         self.playing = False
 
@@ -96,15 +95,12 @@ class World:
             self.bg_scroll += 5
             self.player.rect.x = 200
 
-    def draw(self): #makes background and puts sprites on the screen
+    def draw(self):  # makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
+        self.screen.blit(self.background, (-self.bg_scroll, 0))  # Draw background 
 
-        self.screen.blit(self.background, (-self.bg_scroll, 0))  # Draw background with scroll offset
-
-         # Draw all sprites
+        # Draw all sprites
         self.all_sprites.draw(self.screen)
 
-         # Update the display
+        # Update the display
         pygame.display.flip()
-
-
