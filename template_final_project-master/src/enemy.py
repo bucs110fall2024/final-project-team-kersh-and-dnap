@@ -14,7 +14,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def __init__(self, x, y, enemy=True, speed=1):
         super().__init__()
-        self.image = pygame.Surface((40,40))
+        self.image = pygame.Surface((80,80))
         self.image.fill((255, 0, 0))
         self.rect =self.image.get_rect()
         self.rect.topleft= (x, y) #Coordinates of the character
