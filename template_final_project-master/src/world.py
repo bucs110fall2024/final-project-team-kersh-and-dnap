@@ -116,7 +116,7 @@ class World:
 
         
         font = pygame.font.Font(None, 36)  
-        message = "Jump on red box to win. You're free to explore!"
+        message = "Keep Jumping on Red!"
         text = font.render(message, True, (0, 0, 0))  # Black text
         self.screen.blit(text, (10, 10)) 
 
