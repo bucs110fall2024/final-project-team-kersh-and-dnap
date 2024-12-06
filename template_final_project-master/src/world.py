@@ -1,23 +1,34 @@
 import pygame
+import random
 
 from src.player import Player
 from src.enemy import Enemy
 from src.platform import Platform
 
 class World:
+    
+    """
+    Manages the game world, including sprites and the game loop.
+
+    Args:
+        screen (Surface): The display surface.
+    """
+     
     def __init__(self, screen):
+        """Sets up the game world and initializes objects."""
         pygame.init()
         self.screen = screen
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
         self.playing = True
+        self.bg_color = (135, 206, 235) 
 
         #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player= Player(100, 500, img=None)
+        self.player= Player(100, 500)
         self.all_sprites.add(self.player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
@@ -25,7 +36,14 @@ class World:
         self.all_sprites.add(ground)
         #ADD FLOATING PLATFORMS
         
-        enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
+        enemy = Enemy(500, 465, enemy=True, speed=1)
+        self.enemies.add(enemy)
+        self.all_sprites.add(enemy)
+        self.enemy_spawn_timer = 0
+
+    def spawn_enemy(self):
+        """Spawns an enemy"""
+        enemy = Enemy(500, 465, enemy=True, speed=1)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
@@ -35,6 +53,13 @@ class World:
             self.events()
             self.update()
             self.draw()
+
+            self.enemy_spawn_timer += 1
+
+            if self.enemy_spawn_timer > 120:
+                self.spawn_enemy()
+                self.enemy_spawn_timer=0
+            
             self.clock.tick(60)
 
         if self.player.health <= 0:
@@ -60,7 +85,7 @@ class World:
                     self.player.horizontal_move(0)
 
     def update(self): #update and redraw screen 
-        """XXXXXX"""
+        """ Updates Sprites and checks for collisions"""
         self.all_sprites.update()
 
         on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
@@ -86,6 +111,15 @@ class World:
 
     def draw(self): #makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.fill((135, 206, 235)) #LIGHT BLUE
+        self.screen.fill((self.bg_color)) #LIGHT BLUE
         self.all_sprites.draw(self.screen)
+
+        
+        font = pygame.font.Font(None, 36)  
+        message = "Jump on red box to win. You're free to explore!"
+        text = font.render(message, True, (0, 0, 0))  # Black text
+        self.screen.blit(text, (10, 10)) 
+
         pygame.display.flip()
+
+    

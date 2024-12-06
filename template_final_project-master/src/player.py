@@ -1,7 +1,14 @@
 import pygame
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, img="XXXXXXXXXX.png"):
+    def __init__(self, x, y):
+       """
+    Represents the player character.
+
+    Args:
+        x (int): Initial x-coordinate.
+        y (int): Initial y-coordinate.
+    """
        super().__init__()
        #self.image = pygame.image.load(img)
        self.image = pygame.Surface((40,40))
@@ -32,11 +39,15 @@ class Player(pygame.sprite.Sprite):
           self.on_ground = True
 
     def horizontal_move(self, dx):
-        """Movement left or right"""
+        """Moves the player horizontally.
+
+        Args:
+            dx (int): Change in x direction.
+        """
         self.speedX = dx
 
     def vertical_move(self):
-        "Movement up. Only works when the player is on the ground."
+        "Movement up."
         if self.standing:
             self.speedY= -15
             self.on_ground = False
