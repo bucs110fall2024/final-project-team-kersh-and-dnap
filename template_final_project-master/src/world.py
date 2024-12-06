@@ -12,7 +12,7 @@ class World:
         self.clock = pygame.time.Clock()
         self.playing = True
 
-        self.background = pygame.image.load("C:/Users/luigi/OneDrive/Desktop/final-project-team-kersh-and-dnap-1/assets/sky.png")  # Replace with your background file
+        self.background = pygame.image.load("assets/sky.png")  
         self.bg_width = self.background.get_width()
         self.bg_height = self.background.get_height()
         self.bg_scroll = 0  # Horizontal scroll offset
