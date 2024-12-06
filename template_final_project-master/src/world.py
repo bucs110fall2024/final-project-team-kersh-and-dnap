@@ -1,15 +1,16 @@
 import pygame
 
-pygame.init()
-from player import Player
-from enemy import Enemy
-from platform import Platform
+from src.player import Player
+from src.enemy import Enemy
+from src.platform import Platform
 
 class World:
-    def __init__(self):
+    def __init__(self, screen):
         pygame.init()
-        self.screen = pygame. display.set_mode(800,600)
+        self.screen = screen
         pygame.display.set_caption("Fun Platformer!")
+        self.clock = pygame.time.Clock()
+        self.playing = True
 
         #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
@@ -17,14 +18,14 @@ class World:
         self.enemies = pygame.sprite.Group()
 
         self.player= Player(100, 300, img=None)
-        self.all_sprites.add(self.player)
+        self.all_sprites.add(Player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
         self.platforms.add(ground)
         self.all_sprites.add(ground)
         #ADD FLOATING PLATFORMS
-
-        enemy = Enemy(200, 300, enemy=True, speed=1, img=None)
+        
+        enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
@@ -35,7 +36,6 @@ class World:
             self.update()
             self.draw()
             self.clock.tick(60)
-
 
     def events(self): #for each key event
         """Key events and Inputs"""
@@ -58,9 +58,10 @@ class World:
         self.all_sprites.update()
 
         on_ground= pygame.sprite.spritecollide(self.player, self.platforms, False)
-        if on_ground is True:
+        if on_ground:
             self.player.standing=True
-            self.player.rect.y = on_ground[0].rect.top
+            self.player.on_ground = True
+            self.player.rect.y = on_ground[0].rect.top - self.player.rect.height
         else:
             self.player.on_ground =False
 
@@ -79,7 +80,7 @@ class World:
 
     def draw(self): #makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.fill(135, 206, 235) #LIGHT BLUE
+        self.screen.fill((135, 206, 235)) #LIGHT BLUE
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
