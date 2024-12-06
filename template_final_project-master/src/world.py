@@ -10,11 +10,10 @@ class World:
         pygame.display.set_caption("Fun Platformer!")
         self.clock = pygame.time.Clock()
         self.playing = True
-
         
-        self.background = pygame.image.load("image")  
-        self.bg_width = self.background.get_width()
-        self.bg_height = self.background.get_height()
+        self.bg_color = (135, 206, 235)  # Light blue
+        self.bg_width = 1600  # A large width to allow scrolling
+        self.bg_height = self.screen.get_height()  # Match screen height
         self.bg_scroll = 0  # Horizontal scroll offset
 
         # ADD SPRITE GROUPS
@@ -22,7 +21,7 @@ class World:
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player = Player(100, 300, img=None)
+        self.player = Player(100, 400, img=None)
         self.all_sprites.add(self.player)
 
         ground = Platform(0, 500, 800, 100)  # x, y, width, height
@@ -74,6 +73,7 @@ class World:
             self.player.rect.y = on_ground[0].rect.top - self.player.rect.height
         else:
             self.player.on_ground = False
+            self.player.standing = False
 
         # ENEMY COLLISIONS
         for enemy in self.enemies:
@@ -97,7 +97,10 @@ class World:
 
     def draw(self):  # makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.blit(self.background, (-self.bg_scroll, 0))  # Draw background 
+        self.screen.fill(self.bg_color)  # Fill with light blue
+
+        # If the background scrolls, shift the background horizontally
+        self.screen.scroll(dx=self.bg_scroll, dy=0)  # Scroll horizontally
 
         # Draw all sprites
         self.all_sprites.draw(self.screen)

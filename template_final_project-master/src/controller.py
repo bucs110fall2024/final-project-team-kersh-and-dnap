@@ -21,6 +21,8 @@ class Controller:
       elif self.gamestate == "gameover":
         self.gameoverloop()
 
+  pygame.quit()
+  
   def menuloop(self):
     """ The menu """
     pygame.display.set_caption("Fun Platformer!! press enter")
