@@ -12,6 +12,11 @@ class World:
         self.clock = pygame.time.Clock()
         self.playing = True
 
+        self.background = pygame.image.load("C:/Users/luigi/OneDrive/Desktop/final-project-team-kersh-and-dnap-1/assets/sky.png")  # Replace with your background file
+        self.bg_width = self.background.get_width()
+        self.bg_height = self.background.get_height()
+        self.bg_scroll = 0  # Horizontal scroll offset
+
         #ADD SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
@@ -24,6 +29,10 @@ class World:
         self.platforms.add(ground)
         self.all_sprites.add(ground)
         #ADD FLOATING PLATFORMS
+
+        floating= Platform(300, 400, 200, 20)
+        self.platforms.add(floating)
+        self.all_sprites.add(floating)
         
         enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
         self.enemies.add(enemy)
@@ -84,9 +93,21 @@ class World:
                         print("Game Over")
                         self.playing = False
 
+        if self.player.rect.x > 600:  # Scroll right
+            self.bg_scroll -= 5
+            self.player.rect.x = 600  # keep at center
+        elif self.player.rect.x < 200 and self.bg_scroll < 0:  # Scroll left
+            self.bg_scroll += 5
+            self.player.rect.x = 200
+
     def draw(self): #makes background and puts sprites on the screen
         """Visualizes the background and sprites"""
-        self.screen.fill((135, 206, 235)) #LIGHT BLUE
+
+        self.screen.blit(self.background, (-self.bg_scroll, 0))  # Draw background with scroll offset
+
+         # Draw all sprites
         self.all_sprites.draw(self.screen)
+
+         # Update the display
         pygame.display.flip()
 
