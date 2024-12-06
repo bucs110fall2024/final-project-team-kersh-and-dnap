@@ -1,6 +1,6 @@
 import pygame
 from src.world import World
-
+from src.player import Player
 class Controller:
   
   def __init__(self):
@@ -20,9 +20,8 @@ class Controller:
         self.gameloop()
       elif self.gamestate == "gameover":
         self.gameoverloop()
+  ### below are some sample loop states ###
 
-  pygame.quit()
-  
   def menuloop(self):
     """ The menu """
     pygame.display.set_caption("Fun Platformer!! press enter")
@@ -41,6 +40,11 @@ class Controller:
           self.gamestate = "game"
         elif event.key == pygame.K_ESCAPE:
           self.active = False
+      #event loop
+
+      #update data
+
+      #redraw
       
   def gameloop(self):
    

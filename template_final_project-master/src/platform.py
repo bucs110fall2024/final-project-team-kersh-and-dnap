@@ -10,4 +10,3 @@ class Platform(pygame.sprite.Sprite):
         self.rect.y=y
 
        
-
