@@ -12,7 +12,7 @@ class World:
         self.clock = pygame.time.Clock()
         self.playing = True
 
-        self.background = pygame.image.load("assets/sky.png")  
+        self.background = pygame.image.load("C:/Users/luigi/OneDrive/Desktop/final-project-team-kersh-and-dnap-1/assets/sky.png")  
         self.bg_width = self.background.get_width()
         self.bg_height = self.background.get_height()
         self.bg_scroll = 0  # Horizontal scroll offset
@@ -22,7 +22,7 @@ class World:
         self.platforms = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
 
-        self.player= Player(100, 300, img=None)
+        self.player= Player(100, 300, img="R.png")
         self.all_sprites.add(Player)
 
         ground= Platform(0,500,800,100)#x,y,width,height
@@ -34,7 +34,7 @@ class World:
         self.platforms.add(floating)
         self.all_sprites.add(floating)
         
-        enemy = Enemy(500, 465, enemy=True, speed=1, img=None)
+        enemy = Enemy(500, 465, enemy=True, speed=1, img="template_final_project-master/src/pngkey.com-gaming-characters-png-1790042.png")
         self.enemies.add(enemy)
         self.all_sprites.add(enemy)
 
@@ -45,6 +45,8 @@ class World:
             self.update()
             self.draw()
             self.clock.tick(60)
+
+        return "gameover"
 
     def events(self): #for each key event
         """Key events and Inputs"""
